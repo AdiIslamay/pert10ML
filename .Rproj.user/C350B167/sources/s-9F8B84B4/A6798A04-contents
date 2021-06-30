@@ -1,0 +1,34 @@
+library(shiny)
+library(semantic.dashboard)
+library(png)
+ui <- dashboardPage(
+    dashboardHeader(
+        color = "green", inverted = TRUE
+    ),
+    dashboardSidebar(
+        size = "wide",
+        sidebarMenu(
+            menuItem(tabName = "submenu1", text = "subMenu 1"),
+            menuItem(tabName = "submenu2", text = "subMenu 2"),
+        )
+    ),
+    dashboardBody(
+        tabItems(
+            selected = 1,
+            tabItem(
+                tabName = "submenu1",
+                textOutput(outputId = "submenu1"),
+            ),
+            tabItem(
+                tabName = "submenu2",
+                textOutput(outputId = "submenu2")
+            ),
+        )
+    )
+)
+server <- function(input, output) {
+    output$submenu1 <- renderText("ISI BODY 1")
+    output$submenu2 <- renderText("ISI BODY 2")
+}
+
+shinyApp(ui, server)
